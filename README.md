@@ -1,6 +1,6 @@
 # 2024Chinasoft
 
-This repo provides the code for reproducing the experiments of the paper *Empirical Study on the Capacity of Code Naturalness Modeling for Large Language Models*.
+This repo provides the code for reproducing the experiments of the paper *Empirical Study on the Capacity of Code Naturalness Modeling for Large Language Models in Program Repair*.
 
 ### Dependency
 

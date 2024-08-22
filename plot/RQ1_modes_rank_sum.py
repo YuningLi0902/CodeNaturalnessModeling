@@ -6,11 +6,11 @@ matplotlib.use('Agg')
 
 # Data
 models = [
-    "CodeT5-base", "BERT-large", "BERT-base", "CodeT5-large",
-    "UniXcoder", "InCoder-1b", "InCoder-6b", "CodeBERT"
+    "CodeT5-base", "BERT-large", "BERT-base", "CodeLlama-13b",
+    "CodeT5-large", "UniXcoder", "InCoder-1b", "InCoder-6b", "CodeBERT"
 ]
 
-rank_sums = [8.875, 17.5, 20.75, 25.375, 28.5, 30.375, 38, 44]
+rank_sums = [9.125, 21.25, 24.25, 26.125, 29.875, 33.375, 36.25, 45.625, 51.75]
 
 # Sort the data by rank sum for better visualization
 sorted_indices = np.argsort(rank_sums)

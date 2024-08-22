@@ -5,8 +5,8 @@ import numpy as np
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple, Union
 from torch import nn
 from transformers import LogitsProcessorList, StoppingCriteriaList, LogitsProcessor, NoBadWordsLogitsProcessor
-from transformers.generation_stopping_criteria import validate_stopping_criteria
-from transformers.generation_utils import GenerationMixin, SampleOutput, SampleEncoderDecoderOutput, \
+from transformers.generation.stopping_criteria import validate_stopping_criteria
+from transformers.generation.utils import GenerationMixin, SampleOutput, SampleEncoderDecoderOutput, \
     SampleDecoderOnlyOutput
 from transformers.models.t5.modeling_t5 import T5ForConditionalGeneration
 from transformers.utils import ModelOutput

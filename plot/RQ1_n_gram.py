@@ -7,12 +7,12 @@ matplotlib.use('Agg')
 # Data from the table
 models = [
     "BERT-base", "BERT-large", "CodeBERT", "UniXcoder",
-    "CodeT5-base", "CodeT5-large", "InCoder-1b", "InCoder-6b"
+    "CodeT5-base", "CodeT5-large", "InCoder-1b", "InCoder-6b", "CodeLlama-13b"
 ]
 
-normal_code = [7.69, 9.69, 4.49, 9.18, 8.76, 5.84, 5.95, 5.93]
-buggy_code = [8.56, 10.85, 4.66, 9.43, 9.95, 6.23, 6.12, 6.06]
-fixed_code = [7.85, 9.92, 4.51, 9.21, 9.10, 5.80, 5.94, 6.04]
+normal_code = [7.69, 9.69, 4.49, 9.18, 8.76, 5.84, 5.95, 5.93, 4.47]
+buggy_code = [8.56, 10.85, 4.66, 9.43, 9.95, 6.23, 6.12, 6.06, 4.66]
+fixed_code = [7.85, 9.92, 4.51, 9.21, 9.10, 5.80, 5.94, 6.04, 4.52]
 
 # Setting the positions and width for the bars
 pos = np.arange(len(models))

@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from transformers import RobertaModel, RobertaConfig
 from transformers import AutoTokenizer, T5ForConditionalGeneration, AutoModelForCausalLM, \
-    BertTokenizer, BertForMaskedLM, RobertaTokenizer, RobertaForMaskedLM
+    BertTokenizer, BertForMaskedLM, RobertaTokenizer, RobertaForMaskedLM, LlamaForCausalLM
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from generation import CAT5
@@ -28,6 +28,10 @@ class SpanLM(object):
             self.EOM_ID = 50517
             self.BOS = "<|endoftext|>"
             self.META_FILE = "<|/ file"
+        elif 'codellama' in self.pretrained:
+            self.model = LlamaForCausalLM.from_pretrained(pretrained, device_map="auto", torch_dtype=torch.float16)
+            self.max_length = self.model.config.to_dict()['max_position_embeddings']
+            self.infill_ph = "<MID>"
         else:
             self.model = T5ForConditionalGeneration.from_pretrained(pretrained)
             self.model.__class__ = CAT5
@@ -37,7 +41,8 @@ class SpanLM(object):
             self.END_ID = 2
             self.infill_ID = 32099
         print("Max length: {}".format(self.max_length))
-        self.model = self.model.to(self.device)
+        if 'codellama' not in self.pretrained:
+            self.model = self.model.to(self.device)
         self.tokenizer = AutoTokenizer.from_pretrained(self.pretrained)
         self.batch_size = batch_size
 

@@ -361,6 +361,13 @@ def getFormatInput(args, prefix, suffix, context_tokens=512, unixcoder_mode="enc
             input_tokens.extend([19])
             input_tokens.extend(suffix)
             input_tokens.extend([2])
+    elif 'codellama' in args.model_name_or_path:
+        prefix, suffix = balanceSequenceLength(prefix, suffix, context_tokens - 3)
+        input_tokens = [32007]
+        input_tokens.extend(prefix)
+        input_tokens.extend([32008])
+        input_tokens.extend(suffix)
+        input_tokens.extend([32009])
     else:
         input_tokens = []
     return input_tokens
@@ -476,6 +483,27 @@ def getBatchedTokenScores(args, lm, input_token_list, token_id_list, max_batch_s
                         next_target_token_score_dist = scores[i][1][0].softmax(dim=0)
                         score_next_target_token = next_target_token_score_dist[token_ids[i]]
                         score_next_target_tokens.append(max(score_next_target_token, min_score))
+        elif 'codellama' in args.model_name_or_path:
+            input_tokens = torch.tensor(input_token_list).to(lm.model.device)
+            token_ids = [torch.tensor(int(token_id)).to(lm.model.device) for token_id in token_id_list]
+            context_tokens = len(input_token_list[0])
+            with torch.no_grad():
+                raw_o = lm.model.generate(input_tokens,
+                                          max_length=1 + context_tokens,  # consider infilling task as the MLM task
+                                          do_sample=True,
+                                          output_scores=True,
+                                          return_dict_in_generate=True,
+                                          temperature=1,
+                                          top_k=200,
+                                          top_p=1,
+                                          use_cache=True)
+                t_outputs = lm.tokenizer.batch_decode(raw_o.sequences, skip_special_tokens=False)
+                for t_o in t_outputs:
+                    assert lm.infill_ph in t_o, 'infill_ph not in output'
+                for i in range(len(token_ids)):
+                    next_target_token_score_dist = raw_o.scores[0][i].softmax(dim=0)
+                    score_next_target_token = next_target_token_score_dist[token_ids[i]]
+                    score_next_target_tokens.append(max(score_next_target_token, min_score))
     return score_next_target_tokens
 
 
