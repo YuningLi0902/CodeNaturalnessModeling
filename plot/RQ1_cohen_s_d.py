@@ -23,7 +23,7 @@ indices = list(range(1, len(c_common) + 1))
 # Create a scatter plot
 plt.figure(figsize=(10, 6))
 plt.scatter(indices, c_common, color='blue', label="Cohen's d-common")
-plt.scatter(indices, c_fix, color='red', label="Cohen's d-fix")
+plt.scatter(indices, c_fix, color='red', label="Cohen's d-fixed")
 
 # Adding labels and title
 plt.xlabel('Index')

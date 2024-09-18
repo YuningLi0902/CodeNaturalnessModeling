@@ -7,7 +7,7 @@ matplotlib.use('Agg')
 # Data from the table
 models = [
     "BERT-base", "BERT-large", "CodeBERT", "UniXcoder",
-    "CodeT5-base", "CodeT5-large", "InCoder-1b", "InCoder-6b", "CodeLlama-13b"
+    "CodeT5-base", "CodeT5-large", "InCoder-1B", "InCoder-6B", "CodeLlama-13B"
 ]
 
 data_file = 'n_gram_model_data.pickle'
@@ -24,7 +24,7 @@ fig, axs = plt.subplots(3, 3, figsize=(15, 15))
 for i in range(3):
     for j in range(3):
         ax = axs[i, j]
-        ax.set_xticklabels(['common', 'buggy', 'fix'], fontsize=label_size)
+        ax.set_xticklabels(['common', 'buggy', 'fixed'], fontsize=label_size)
         ax.tick_params(axis='y', labelsize=label_size-1)
         result = ax.boxplot(data_list[3 * i + j], patch_artist=True, showmeans=True, meanline=True,
                             medianprops={'color': 'black', 'linewidth': 2},
@@ -41,7 +41,7 @@ fig, axs = plt.subplots(3, 3, figsize=(15, 15))
 for i in range(3):
     for j in range(3):
         ax = axs[i, j]
-        ax.set_xticklabels(['common', 'buggy', 'fix'], fontsize=label_size)
+        ax.set_xticklabels(['common', 'buggy', 'fixed'], fontsize=label_size)
         ax.tick_params(axis='y', labelsize=label_size-1)
         result = ax.boxplot(data_list[3 * i + j], patch_artist=True, showmeans=True, showfliers=False, meanline=True,
                             medianprops={'color': 'black', 'linewidth': 2},

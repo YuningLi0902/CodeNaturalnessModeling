@@ -7,7 +7,7 @@ matplotlib.use('Agg')
 # Data from the table
 models = [
     "BERT-base", "BERT-large", "CodeBERT", "UniXcoder",
-    "CodeT5-base", "CodeT5-large", "InCoder-1b", "InCoder-6b", "CodeLlama-13b"
+    "CodeT5-base", "CodeT5-large", "InCoder-1B", "InCoder-6B", "CodeLlama-13B"
 ]
 
 normal_code = [7.69, 9.69, 4.49, 9.18, 8.76, 5.84, 5.95, 5.93, 4.47]
@@ -23,7 +23,7 @@ fig, ax = plt.subplots(figsize=(12, 6))
 
 bar1 = ax.bar(pos - width, normal_code, width, label='Common Code', color='#42a1ff')
 bar2 = ax.bar(pos, buggy_code, width, label='Buggy Code', color='#d64a4a')
-bar3 = ax.bar(pos + width, fixed_code, width, label='Fix Code', color='#3cc32c')
+bar3 = ax.bar(pos + width, fixed_code, width, label='Fixed Code', color='#3cc32c')
 
 # Adding labels and title
 ax.set_ylabel('Code Naturalness', fontsize=12)
